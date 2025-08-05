@@ -69,6 +69,7 @@ export const SignUpForm = () => {
             form.setError("email", {
               message: "Email já cadastrado",
             });
+            return;
           }
           toast.error(error.error.message);
         },
