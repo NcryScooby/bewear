@@ -1,8 +1,10 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -23,6 +25,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
 
 const formSchema = z.object({
   email: z.email("Email inválido"),
@@ -31,11 +34,8 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-const onSubmit = (values: FormValues) => {
-  console.log(values);
-};
-
-export const SignInForm = () => {
+const SignInForm = () => {
+  const router = useRouter();
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,6 +43,31 @@ export const SignInForm = () => {
       password: "",
     },
   });
+
+  const onSubmit = async (values: FormValues) => {
+    await authClient.signIn.email({
+      email: values.email,
+      password: values.password,
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/");
+        },
+        onError: (ctx) => {
+          if (ctx.error.code === "INVALID_EMAIL_OR_PASSWORD") {
+            toast.error("Email ou senha inválidos");
+            form.setError("email", {
+              message: "Email ou senha inválidos",
+            });
+            form.setError("password", {
+              message: "Email ou senha inválidos",
+            });
+            return;
+          }
+          toast.error(ctx.error.message);
+        },
+      },
+    });
+  };
 
   return (
     <>
@@ -94,3 +119,5 @@ export const SignInForm = () => {
     </>
   );
 };
+
+export default SignInForm;

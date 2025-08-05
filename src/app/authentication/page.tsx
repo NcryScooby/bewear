@@ -1,9 +1,9 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { SignInForm } from "./components/sign-in-form";
-import { SignUpForm } from "./components/sign-up-form";
+import SignInForm from "./components/sign-in-form";
+import SignUpForm from "./components/sign-up-form";
 
-export const Authentication = async () => {
+const Authentication = async () => {
   return (
     <div className="flex w-full max-w-sm flex-col gap-6 p-5">
       <Tabs defaultValue="sign-in">
@@ -21,3 +21,5 @@ export const Authentication = async () => {
     </div>
   );
 };
+
+export default Authentication;

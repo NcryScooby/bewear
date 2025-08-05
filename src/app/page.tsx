@@ -1,9 +1,11 @@
-import { Authentication } from "./authentication/page";
+import Authentication from "./authentication/page";
 
-export default function Home() {
+const Home = () => {
   return (
     <div>
       <Authentication />
     </div>
   );
-}
+};
+
+export default Home;

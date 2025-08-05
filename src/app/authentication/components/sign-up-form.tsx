@@ -41,7 +41,7 @@ const formSchema = z
 
 type FormValues = z.infer<typeof formSchema>;
 
-export const SignUpForm = () => {
+const SignUpForm = () => {
   const router = useRouter();
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -63,15 +63,15 @@ export const SignUpForm = () => {
           router.push("/");
           toast.success("Conta criada com sucesso");
         },
-        onError: (error) => {
-          if (error.error.code === "USER_ALREADY_EXISTS") {
+        onError: (ctx) => {
+          if (ctx.error.code === "USER_ALREADY_EXISTS") {
             toast.error("Email já cadastrado");
             form.setError("email", {
               message: "Email já cadastrado",
             });
             return;
           }
-          toast.error(error.error.message);
+          toast.error(ctx.error.message);
         },
       },
     });
@@ -157,3 +157,5 @@ export const SignUpForm = () => {
     </>
   );
 };
+
+export default SignUpForm;
