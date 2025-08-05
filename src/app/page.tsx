@@ -1,10 +1,10 @@
-import Authentication from "./authentication/page";
+import Header from "@/components/common/header";
 
 const Home = () => {
   return (
-    <div>
-      <Authentication />
-    </div>
+    <>
+      <Header />
+    </>
   );
 };
 
