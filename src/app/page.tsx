@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
+import { Authentication } from "./authentication/page";
 
 export default function Home() {
   return (
     <div>
-      <Button>Bootcamp</Button>
+      <Authentication />
     </div>
   );
 }
