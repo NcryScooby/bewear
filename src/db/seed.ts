@@ -242,10 +242,13 @@ const productImages = {
 
 function generateSlug(name: string): string {
   return name
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/ç/g, "c")
+    .replace(/[^a-zA-Z0-9\s-]/g, "")
     .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .trim();
+    .trim()
+    .replace(/\s+/g, "-");
 }
 
 const categories = [
