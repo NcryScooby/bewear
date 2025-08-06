@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 
 const BrandList = () => {
   const brands = [
@@ -20,16 +19,14 @@ const BrandList = () => {
       <div className="flex w-full gap-6 overflow-x-auto px-5 [&::-webkit-scrollbar]:hidden">
         {brands.map((brand) => (
           <div key={brand.name} className="flex flex-col items-center gap-y-4">
-            <div className="h-[82px] w-[82px] cursor-pointer rounded-3xl border-1 p-6">
-              <Link href="/">
-                <Image
-                  className="h-full"
-                  src={brand.logo}
-                  alt={brand.name}
-                  width={32}
-                  height={32}
-                />
-              </Link>
+            <div className="h-[82px] w-[82px] rounded-3xl border-1 p-6">
+              <Image
+                className="h-full"
+                src={brand.logo}
+                alt={brand.name}
+                width={32}
+                height={32}
+              />
             </div>
             <p className="truncate text-sm font-medium">{brand.name}</p>
           </div>
