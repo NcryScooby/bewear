@@ -3,7 +3,6 @@
 import { LogInIcon, LogOutIcon, MenuIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 import { authClient } from "@/lib/auth-client";
 
